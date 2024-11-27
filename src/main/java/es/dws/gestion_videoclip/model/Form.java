@@ -1,20 +1,21 @@
 package es.dws.gestion_videoclip.model;
 
-import java.time.Year;
+import org.hibernate.validator.constraints.Length;
 
-import io.micrometer.common.lang.Nullable;
+import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * Form
+ */
 @Data
 @AllArgsConstructor
 @Builder
-public class Video {
-
-    private Integer id;
+public class Form {
 
     @NotBlank
     private String title;
@@ -25,13 +26,10 @@ public class Video {
     @NotBlank
     private String genre;
 
-    /**
-     * Tipo de dato que contiene verificacion de formato adecuada,
-     * y permite acceder a metodos utiles
-     */
     @Nullable
-    @Past
-    private Year releaseYear;
+    @Length(min = 4, max = 4)
+    @Min(1500)
+    private Integer releaseYear;
 
     @NotBlank
     private String videoUrl;

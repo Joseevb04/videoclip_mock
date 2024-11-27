@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es" xmlns="https://thymeleaf.org">
+	<head>
+		<th:block th:insert="~{fragment.html :: head}" />
+		<title>Home</title>
+	</head>
+	<body>
+		<header th:replace="~{fragment.html :: header}" />
+		<main>
+			<h1>Videos</h1>
+
+			<section th:if="${!videos.isEmpty()}">
+				<div
+					th:each="video : ${videos}"
+					class="card d-flex flex-row align-items-center m-3"
+				>
+					<div class="w-100 p-3">
+						<h2 th:text="${video.title}"></h2>
+						<video th:src="${video.videoUrl}"></video>
+						<p>Artista: <span th:text="${video.artist}" /></p>
+						<p>
+							Año de publicacion:
+							<span th:text="${video.releaseYear}?: 'N/A'" />
+						</p>
+						<p>Genero: <span th:text="${video.genre}" /></p>
+					</div>
+
+					<div class="m-5">
+						<a
+							th:href="@{/video/delete(id=${video.id})}"
+							class="btn btn-secondary"
+							>Borrar</a
+						>
+					</div>
+				</div>
+			</section>
+
+			<section th:if="${videos.isEmpty()}">
+				<h2>No hay videoclips subidos</h2>
+			</section>
+		</main>
+	</body>
+</html>
