@@ -1,7 +1,6 @@
 package es.dws.gestion_videoclip.model;
 
-import org.hibernate.validator.constraints.Length;
-
+import es.dws.gestion_videoclip.enumeration.GenreEnum;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -24,10 +23,9 @@ public class Form {
     private String artist;
 
     @NotBlank
-    private String genre;
+    private GenreEnum genre;
 
     @Nullable
-    @Length(min = 4, max = 4)
     @Min(1500)
     private Integer releaseYear;
 

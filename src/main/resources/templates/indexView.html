@@ -16,7 +16,16 @@
 				>
 					<div class="w-100 p-3">
 						<h2 th:text="${video.title}"></h2>
-						<video th:src="${video.videoUrl}"></video>
+						<iframe
+							width="854"
+							height="480"
+							th:src="${video.videoUrl}"
+							th:title="${video.title}"
+							frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							referrerpolicy="strict-origin-when-cross-origin"
+							allowfullscreen
+						></iframe>
 						<p>Artista: <span th:text="${video.artist}" /></p>
 						<p>
 							Año de publicacion:
@@ -26,11 +35,19 @@
 					</div>
 
 					<div class="m-5">
-						<a
-							th:href="@{/video/delete(id=${video.id})}"
-							class="btn btn-secondary"
-							>Borrar</a
+						<form
+							th:method="delete"
+							th:action="@{/video/delete/{id}(id = ${video.id})}"
 						>
+							<input
+								type="hidden"
+								name="_method"
+								value="delete"
+							/>
+							<button type="submit" class="btn btn-secondary">
+								Borrar
+							</button>
+						</form>
 					</div>
 				</div>
 			</section>

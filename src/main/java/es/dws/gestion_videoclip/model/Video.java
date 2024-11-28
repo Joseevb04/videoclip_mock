@@ -2,6 +2,7 @@ package es.dws.gestion_videoclip.model;
 
 import java.time.Year;
 
+import es.dws.gestion_videoclip.enumeration.GenreEnum;
 import io.micrometer.common.lang.Nullable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
@@ -23,7 +24,7 @@ public class Video {
     private String artist;
 
     @NotBlank
-    private String genre;
+    private GenreEnum genre;
 
     /**
      * Tipo de dato que contiene verificacion de formato adecuada,

@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
 
+import es.dws.gestion_videoclip.enumeration.GenreEnum;
 import es.dws.gestion_videoclip.model.Video;
 
 @Service
@@ -20,23 +21,31 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public Set<Video> getAllVideos() {
-        {
+
+        if (videos.isEmpty()) {
             // agrega videos random
             final Random random = new Random();
 
             videos.addAll(Stream.generate(() -> Video.builder()
-                    .id(random.nextInt(1000))
+                    .id(counter++)
                     .title("Video " + random.nextInt(1000))
                     .artist("Artist " + random.nextInt(100))
-                    .genre("Genre " + random.nextInt(10))
+                    .genre(GenreEnum.values()[random.nextInt(GenreEnum.values().length)])
                     .releaseYear(random.nextBoolean() ? Year.of(random.nextInt(120) + 1900) : null)
                     .videoUrl("https://example.com/video" + random.nextInt(1000))
                     .build())
                     .limit(5)
                     .collect(Collectors.toSet()));
-        }
 
-        videos.forEach(System.out::println);
+            videos.add(Video.builder()
+                    .id(counter++)
+                    .title("Best video ever")
+                    .artist("Secret")
+                    .genre(GenreEnum.POP)
+                    .releaseYear(null)
+                    .videoUrl("https://www.youtube.com/embed/dQw4w9WgXcQ")
+                    .build());
+        }
 
         return videos;
     }
